@@ -29,7 +29,8 @@ class AltfolderStorage implements StorageController
 
     function pullFile($hash,$location)
     {
-        $altname=ALT_FOLDER.DS.$hash;
+	// Have the puller grab the original folder/file structure instead of just files. 
+        $altname=ALT_FOLDER.DS.$hash.DS.$hash;
 		if(file_exists($altname))
 		{
             copy($altname,$location);
@@ -38,12 +39,13 @@ class AltfolderStorage implements StorageController
 
     function pushFile($source,$hash)
     {
-        $altname=ALT_FOLDER.DS.$hash;
-		if(!$this->hashExists($hash))
-		{
-            copy($source,$altname);
-            return true;
-        }
+	// We don't want to push. Other jobs handle this 
+        //$altname=ALT_FOLDER.DS.$hash;
+	//	if(!$this->hashExists($hash))
+	//	{
+        //   copy($source,$altname);
+        //    return true;
+        //}
         
         return false;
     }
